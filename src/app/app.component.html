@@ -1,1 +1,30 @@
-<h1>Hello</h1>
+<nav>
+   <ul class="pagination justify-content-center my-5">
+      <li class="page-item" [appClass]="{ disabled: currentPage === 0 }">
+         <a class="page-link" href="#" (click)="currentPage = currentPage - 1">Previous</a>
+      </li>
+      <ng-container *appTimes="images.length; let i = index">
+         <li class="page-item" 
+            [appClass]="{ active: i === currentPage}"
+            *ngIf="checkWindowIndex(i)">
+            <a class="page-link" href="#" (click)="onPageChange(i)">{{ i + 1 }}</a>
+         </li>
+      </ng-container>
+      <li class="page-item" [appClass]="{ disabled: currentPage === images.length -1 }">
+         <a class="page-link" href="#" (click)="currentPage = currentPage + 1">Next</a>
+      </li>
+   </ul>
+</nav>
+
+<div class="container-fluid">
+   <div class="row justify-content-center my-4">
+      <div class="col text-center">
+         <h3>{{ images[currentPage].title }}</h3>
+      </div>
+   </div>
+   <div class="row justify-content-center">
+      <div class="col text-center">
+         <img [src]="images[currentPage].url" [alt]="images[currentPage].title"/>
+      </div>
+   </div>
+</div>
