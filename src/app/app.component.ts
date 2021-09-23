@@ -9,7 +9,7 @@ export class AppComponent {
 
   currentPage: number = 0;
 
-  images = 
+  images: Array<image> = 
   [
     {
       title : "At the beach",
@@ -102,4 +102,9 @@ export class AppComponent {
 	  
   }
 
+}
+
+interface image {
+  title: string,
+  url: string
 }
