@@ -1,7 +1,7 @@
 <nav>
    <ul class="pagination justify-content-center my-5">
       <li class="page-item" [appClass]="{ disabled: currentPage === 0 }">
-         <a class="page-link" href="#" (click)="currentPage = currentPage - 1">Previous</a>
+         <a class="page-link" href="#" (click)="currentPage = currentPage - 1">Précédent</a>
       </li>
       <ng-container *appTimes="images.length; let i = index">
          <li class="page-item" 
@@ -11,7 +11,7 @@
          </li>
       </ng-container>
       <li class="page-item" [appClass]="{ disabled: currentPage === images.length -1 }">
-         <a class="page-link" href="#" (click)="currentPage = currentPage + 1">Next</a>
+         <a class="page-link" href="#" (click)="currentPage = currentPage + 1">Suivant</a>
       </li>
    </ul>
 </nav>
