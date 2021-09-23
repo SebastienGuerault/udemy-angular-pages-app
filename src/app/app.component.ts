@@ -7,8 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class AppComponent {
 
-  currentPage: number = 0;
-
   images: Array<image> = 
   [
     {
@@ -93,12 +91,41 @@ export class AppComponent {
     }
   ];
 
+  currentPage: number = 0;
+  nbIndexPerPage: number = 5;
+  nbMaxPages: number = Math.ceil(this.images.length / this.nbIndexPerPage);
+  highligthIndex: string = '#';
+  indexArray = new Array(this.images.length);
+  
+
   onPageChange(index: number) {
 		this.currentPage = index;
   }
 
   checkWindowIndex(index: number) {
 		return Math.abs(this.currentPage - index) < 5;
+  }
+
+  getDisplayValue(index: number) {
+    console.log(index, this.indexArray[index]);
+    return this.indexArray[index];
+  }
+
+  onClickNextPage() {
+
+    this.currentPage++;
+
+    for (let i = 0; i < this.indexArray.length; i++) {
+      if ((i >= this.currentPage * this.nbIndexPerPage) && (i < (this.currentPage + 1) * this.nbIndexPerPage)) {
+        console.log("ok");
+        
+        this.indexArray[i] = "block";
+      } else {
+        console.log("pas ok");
+        this.indexArray[i] ="none";
+      }
+    }
+    
   }
 }
 

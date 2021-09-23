@@ -6,12 +6,14 @@
       <ng-container *appTimes="images.length; let i = index">
          <li class="page-item" 
             [appClass]="{ active: i === currentPage}"
-            *ngIf="checkWindowIndex(i)">
-            <a class="page-link" href="#" (click)="onPageChange(i)">{{ i + 1 }}</a>
+            *ngIf="checkWindowIndex(i)"
+            [ngStyle]="{display: getDisplayValue(i)}"
+            >
+            <a class="page-link" [href]="highligthIndex" (click)="onPageChange(i)">{{ i + 1 }}</a>
          </li>
       </ng-container>
       <li class="page-item" [appClass]="{ disabled: currentPage === images.length -1 }">
-         <a class="page-link" href="#" (click)="currentPage = currentPage + 1">Suivant</a>
+         <a class="page-link" href="#" (click)="onClickNextPage()">Suivant</a>
       </li>
    </ul>
 </nav>
