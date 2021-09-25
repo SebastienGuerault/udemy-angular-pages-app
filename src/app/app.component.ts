@@ -5,7 +5,8 @@ import { Component, Input } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent 
+{
 
   images: Array<image> = 
   [
@@ -91,45 +92,65 @@ export class AppComponent {
     }
   ];
 
+  currentCard: number = 0;
   currentPage: number = 0;
   nbIndexPerPage: number = 5;
   nbMaxPages: number = Math.ceil(this.images.length / this.nbIndexPerPage);
   highligthIndex: string = '#';
   indexArray = new Array(this.images.length);
-  
 
-  onPageChange(index: number) {
-		this.currentPage = index;
+  // initialisation
+  constructor()
+  {
+    this.setFlagVisibleImages(this.currentPage);
+  }
+  
+  displayCardOfIndex(index: number) 
+  {
+		this.currentCard = index;
   }
 
   checkWindowIndex(index: number) {
 		return Math.abs(this.currentPage - index) < 5;
   }
 
-  getDisplayValue(index: number) {
-    console.log(index, this.indexArray[index]);
-    return this.indexArray[index];
+  getDisplayValue(i : number)
+  {
+    console.log("element : " + i);
+    return this.indexArray[i];
   }
 
-  onClickNextPage() {
+  onClickNextPage() 
+  { 
 
-    this.currentPage++;
+    if (this.currentPage + 1 <this.nbMaxPages)
+      this.currentPage++;
 
-    for (let i = 0; i < this.indexArray.length; i++) {
-      if ((i >= this.currentPage * this.nbIndexPerPage) && (i < (this.currentPage + 1) * this.nbIndexPerPage)) {
-        console.log("ok");
-        
-        this.indexArray[i] = "block";
-      } else {
-        console.log("pas ok");
-        this.indexArray[i] ="none";
+    this.setFlagVisibleImages(this.currentPage);
+  }
+
+  // une fonction qui met à jour les flags de visibilité
+  // pour une page donnée
+  setFlagVisibleImages(pageNumber: number)
+  {
+    for (let i = 0; i < this.indexArray.length; i++) 
+    {
+      if ((i >= pageNumber * this.nbIndexPerPage) && (i < (pageNumber + 1) * this.nbIndexPerPage)) 
+      {
+        this.indexArray[i] = true;
+      } 
+      else 
+      {
+        this.indexArray[i] = false;
       }
     }
-    
   }
+
+
 }
 
 interface image {
   title: string,
   url: string
 }
+
