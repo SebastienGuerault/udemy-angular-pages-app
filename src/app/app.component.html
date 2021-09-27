@@ -2,7 +2,7 @@
 
    <ul class="pagination justify-content-center my-5">
       <li class="page-item" [appClass]="{ disabled: currentPage === 0 }">
-         <a class="page-link" href="#" >Précédent</a>
+         <a class="page-link" href="#" (click)="onClickPreviousPage()">Précédent</a>
       </li>
 
 
@@ -15,7 +15,7 @@
          </li>
       </ng-container>
 
-      <li class="page-item" [appClass]="{ disabled: currentPage === images.length -1 }">
+      <li class="page-item" [appClass]="{ disabled: currentPage === nbMaxPages - 1 }">
          <a class="page-link" href="#" (click)="onClickNextPage()">Suivant</a>
       </li>
    </ul>

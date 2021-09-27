@@ -98,6 +98,7 @@ export class AppComponent
   nbMaxPages: number = Math.ceil(this.images.length / this.nbIndexPerPage);
   highligthIndex: string = '#';
   indexArray = new Array(this.images.length);
+  
 
   // initialisation
   constructor()
@@ -110,21 +111,27 @@ export class AppComponent
 		this.currentCard = index;
   }
 
-  checkWindowIndex(index: number) {
+/*   checkWindowIndex(index: number) {
 		return Math.abs(this.currentPage - index) < 5;
-  }
+  } */
 
   getDisplayValue(i : number)
   {
-    console.log("element : " + i);
     return this.indexArray[i];
   }
 
   onClickNextPage() 
   { 
-
-    if (this.currentPage + 1 <this.nbMaxPages)
+    if (this.currentPage + 1 < this.nbMaxPages)
       this.currentPage++;
+
+    this.setFlagVisibleImages(this.currentPage);
+  }
+
+  onClickPreviousPage() 
+  {
+    if (this.currentPage > 0)
+      this.currentPage--;
 
     this.setFlagVisibleImages(this.currentPage);
   }
@@ -145,10 +152,7 @@ export class AppComponent
       }
     }
   }
-
-
 }
-
 interface image {
   title: string,
   url: string
